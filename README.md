@@ -16,7 +16,7 @@
 注意：<br>
 (1)jsp文件要放在默认目录WebContent下，而不是WEB-INF下，不然会找不到；<br>
 当然可以在web.xml下配置，就可以找到，如下：<br>
-&lt;<welcome-file-list>&gt;
+&lt;welcome-file-list&gt;
 &lt;<welcome-file>/WEB-INF/pages/index.jsp</welcome-file>&gt;
 &lt;</welcome-file-list>&gt;
 <br>
