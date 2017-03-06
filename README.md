@@ -17,7 +17,7 @@
 (1)jsp文件要放在默认目录WebContent下，而不是WEB-INF下，不然会找不到；<br>
 当然可以在web.xml下配置，就可以找到，如下：<br>
 &lt;welcome-file-list&gt;<br>
-    &lt;welcome-file&gt;/WEB-INF/pages/index.jsp&lt;/welcome-file&gt;<br>
+　　　　&lt;welcome-file&gt;/WEB-INF/pages/index.jsp&lt;/welcome-file&gt;<br>
 &lt;/welcome-file-list&gt;<br>
 (2)jsp不像html可以直接用浏览器打开，jsp需要配置tomcat启动。<br>
 但启动后，直接修改jsp，google浏览器刷新即可更新。
