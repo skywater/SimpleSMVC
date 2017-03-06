@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration PUBLIC "-//ibatis.apache.org//DTD Mapper 3.1//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3.1-mapper.dtd">
+<configuration>
+
+    <!-- 加载Mapper映射文件 -->
+    <mappers>
+    	<!-- 空着就行，由spring配置加载 -->
+    
+	    <!-- 全局别名设置, 在映射文件中只需写别名, 而不必写出整个类路径  -->
+	    <typeAliases>
+	    	 <typeAlias alias="StaffInfoPo" type="com.company.springmvc.services.staffinfo.po.StaffInfoPo"></typeAlias>
+	    </typeAliases>
+	</mappers>
+</configuration>

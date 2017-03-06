@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace用于java代码调用时识别指定xml的mapper文件 -->
+<mapper namespace="com.company.springmvc.services.staffinfo.dao.IStaffInfoMapper">
+	<resultMap type="com.company.springmvc.services.staffinfo.po.StaffInfoPo" id="StaffInfoPo_ORM">
+		<result property="name" column="NAME"/>
+		<result property="sex" column="SEX"/>
+		<result property="age" column="AGE"/>
+		<result property="height" column="HEIGHT"/>
+	</resultMap>
+
+    <select id="getStaffInfos" resultMap="StaffInfoPo_ORM"> 
+        select * from t_staff_info
+        <where>
+	        <if test="id != null">
+				 AND id = #{id, jdbcType=INTEGER}
+			</if>
+	        <if test="name != null">
+				 AND name = #{name, jdbcType=VARCHAR}
+			</if>
+		</where>
+    </select>
+
+</mapper>
