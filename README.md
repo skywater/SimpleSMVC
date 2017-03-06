@@ -10,7 +10,7 @@
 
 #####二、基本配置
 1、选中WebContent目录，右键新建一个jsp文件，内容见该项目代码；<br>
-2、现在就将这个项目部署到Tomcat,来验证是否可以跑起来。<br>
+2、再就将这个项目部署到Tomcat，来验证是否可以跑起来。<br>
 在项目上右键——Run/Debug As——Run/Debug on Server，
 直接点击Finish，浏览器http://localhost:8080/SimpleSMVC/ ；<br>
 注意：<br>
@@ -48,6 +48,8 @@ staffinfo文件夹存放mybatis映射配置文件，对应staffinfo.dao下的文
 最左侧Project Explore栏右上角，点击向下的三角形箭头，下拉选项有文件夹和包的显示模式，<br>
 “folder presentation”，一般默认，好像没什么用；<br>
 “package presentation”，选中hierarchical（分层），即可显示层次结构；<br>
-<br>
 3、选中WebContent，新增文件夹Resources，再在该目录下新增js、css、img等文件夹；<br>
 4、选中WEB-INF，新增文件夹pages，里面存放各种jsp文件；<br>
+5、WEB-INF下lib放入要用的jar包，可以直接粘贴进去；<br>
+<br>
+#####四、实现业务功能和各种配置，再就将这个项目部署到Tomcat，运行；
