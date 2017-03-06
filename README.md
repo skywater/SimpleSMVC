@@ -51,5 +51,4 @@ staffinfo文件夹存放mybatis映射配置文件，对应staffinfo.dao下的文
 3、选中WebContent，新增文件夹Resources，再在该目录下新增js、css、img等文件夹；<br>
 4、选中WEB-INF，新增文件夹pages，里面存放各种jsp文件；<br>
 5、WEB-INF下lib放入要用的jar包，可以直接粘贴进去；<br>
-<br>
 #####四、实现业务功能和各种配置，再就将这个项目部署到Tomcat，运行；
