@@ -22,7 +22,7 @@
     <!-- spring3.1开始，应该用RequestMappingHandlerMapping来替换 DefaultAnnotationHandlerMapping，
     	   用 RequestMappingHandlerAdapter来替换 AnnotationMethodHandlerAdapter -->
     <!-- 标签对应的实现类是org.springframework.web.servlet.config.AnnotationDrivenBeanDefinitionParser，
-    	   这个类主要注册8个类的实例：
+    	 这个类主要注册8个类的实例：
          1.RequestMappingHandlerMapping处理@RequestMapping注解;
     	 2.BeanNameUrlHandlerMapping将controller类的名字映射为请求url;
     	 1和2都实现了HandlerMapping接口，用来处理请求映射;
@@ -48,8 +48,9 @@
 	<!-- 可以：com/com.**/com.*/com.web/com.web.**/com.web.* -->
 	
 	
-	<!-- 静态资源被DispatcherServlet过滤，无法访问，必须配置静态文件，或者<url-pattern>*.js</url-pattern> -->
-	<!-- 对静态资源文件的访问,必须要配置mvc:annotation-driven-->
+	<!-- 静态资源被DispatcherServlet过滤，无法访问，必须配置静态资源过滤，可以直接访问，而不经过controller
+	     ，或者在web.xml里直接过滤<url-pattern>*.js</url-pattern> -->
+	<!-- 对静态资源文件的访问，必须要配置mvc:annotation-driven -->
 	<!-- mapping映射到 ResourceHttpRequestHandler进行处理，location指定静态资源的位置,注意必须是webapp根目录下的路径。 -->
 	<!-- 经测试map，只有如下写法可以找到，无论是mapping还是location，其余写法
 	/Resources/*/**、/Resources/**、/**/Resources/css/*、/**/Resources/css/**均不能找到 -->
@@ -57,8 +58,8 @@
  	<mvc:resources mapping="/Resources/**" location="/Resources/css/,/Resources/js/,/Resources/img/" />
      -->
     <mvc:resources mapping="/Resources/css/**" location="/Resources/css/" />
-  	<mvc:resources mapping="/Resources/img/**" location="/Resources/img/" />
-  	<mvc:resources mapping="/Resources/js/**" location="/Resources/js/" />
+    <mvc:resources mapping="/Resources/img/**" location="/Resources/img/" />
+    <mvc:resources mapping="/Resources/js/**" location="/Resources/js/" />
   
     <!-- spring容器中最多只能定义一个context:property-placeholder，若有多个，可用通配符一并加载 -->
     <!-- <context:property-placeholder location="classpath:/com/company/springmvc/config/jdbc.properties"/>  -->
