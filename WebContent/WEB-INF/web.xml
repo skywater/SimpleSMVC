@@ -10,32 +10,38 @@
 
 	<welcome-file-list>
     	<welcome-file>/WEB-INF/pages/index.jsp</welcome-file>
-    	<welcome-file>/WEB-INF/pages/index.html</welcome-file>
-    	<welcome-file>/WEB-INF/pages/hello.jsp</welcome-file>
   	</welcome-file-list>
   	
-  	<!-- 负责启动Spring容器的监听器 -->
-	<!-- <listener>
+  	<!-- 原本全部是DispatcherServlet处理，现在分开处理，结构更清晰 -->
+  	
+  	<!-- 负责启动Spring容器的监听器，提供应用所使用的中间层服务：DataSource、DAO、Services -->
+	<listener>
 		<listener-class>
 			org.springframework.web.context.ContextLoaderListener
 		</listener-class>
 	</listener>
+  	<!-- 若无context-param，默认的路径是/WEB-INF/applicationContext.xml -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
+	    <!-- 可以用逗号分隔多个配置文件路径，多文件一般是为了防止配置过多导致单文件过于臃肿 -->
 		<param-value>
 			classpath:/com/company/springmvc/config/spring-config/applicationContext*.xml
 		</param-value>
-	</context-param> -->
+	</context-param>
 	
-    <!-- 指定servlet -->
+    <!-- 指定servlet，提供服务：Controller、HandlerMapping、HandlerAdapter、ViewResolver等等 -->
     <servlet>
 	    <servlet-name>springmvc</servlet-name>
 	    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	    	<!-- 若无init-param，Spring默认配置文件为“/WEB-INF/[servlet名字]-servlet.xml”。 -->
 	        <init-param>
 	        	<!-- 和上面Spring容器的监听器的context-param名字一样，
 	        	好像DispatcherServlet的内部实现是继承上面的applicationContext的内部实现 -->
 	            <param-name>contextConfigLocation</param-name>
-	            <param-value>classpath:/com/company/springmvc/config/spring-config/springmvc-servlet.xml</param-value>
+	            <!-- 可以用逗号分隔多个配置文件路径，多文件一般是为了防止配置过多导致单文件过于臃肿 -->
+	            <param-value>
+	            	classpath:/com/company/springmvc/config/spring-config/*servlet.xml
+	            </param-value>
              </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
