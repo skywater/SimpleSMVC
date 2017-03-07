@@ -2,7 +2,6 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>小爬·view</title>
 	</head>
 	<body>
