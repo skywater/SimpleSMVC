@@ -2,7 +2,8 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<!-- 上面已经有头文件了，可以省略 -->
+		<!-- <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> -->
 		<!-- <script language="text/javascript" src="/Resources/index.js" /> -->
 		<title>笑趴JSP</title>
 	</head>
