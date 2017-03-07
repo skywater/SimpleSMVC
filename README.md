@@ -1,5 +1,5 @@
 # SimpleSMVC
-ContextLoaderListener和DispatcherServlet分离处理
+Opt1：ContextLoaderListener和DispatcherServlet分离处理；
 最简单spring mvc框架搭建
 ===
 【详细步骤】
