@@ -3,7 +3,15 @@
 	<head>
 		<title>JSP标准！！</title>
 		<link rel="stylesheet" type="text/css" href="/Resources/css/style.css" />
-		<img alt="东西南北.png" src="/Resources/img/东西南北.png" width="300px" height="300px" />
+		<!-- 该图是1920*1200，10%并不等于192或120.百分比是与浏览器显示窗口的一定比例来缩放图像。
+		               图1，长宽随浏览器窗口变化而变化，图像长宽同时变化，产生扭曲；
+		               图2、图3只设置一种百分比，那么不管是放大还是缩小，浏览器都将保持图像的宽高比例。
+		               这意味着图像的高度与宽度之比将不会发生变化，图像也就不会发生扭曲。只是长或宽随窗口大小改变；
+		              图4，固定数值，不随窗口大小改变而改变 -->
+		<img alt="东西南北1.png" src="/Resources/img/东西南北.png" width="10%" height="10%" /><br>
+		<img alt="东西南北2.png" src="/Resources/img/东西南北.png" width="10%" /><br>
+		<img alt="东西南北3.png" src="/Resources/img/东西南北.png" height="10%" /><br>
+		<img alt="东西南北4.png" src="/Resources/img/东西南北.png" width="192px" height="120px" />
 		<script type="text/javascript" src="/Resources/js/index.js"></script>
 	</head>
 	<body>
