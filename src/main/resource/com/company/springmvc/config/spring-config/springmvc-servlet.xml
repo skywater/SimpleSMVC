@@ -62,12 +62,12 @@
     <mvc:resources mapping="/Resources/js/**" location="/Resources/js/" />
   
     <!-- spring容器中最多只能定义一个context:property-placeholder，若有多个，可用通配符一并加载 -->
-    <!-- <context:property-placeholder location="classpath:/com/company/springmvc/config/jdbc.properties"/>  -->
     <!-- 1、指定从配置文件中加载数据库连接信息 -->
-    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <context:property-placeholder location="classpath:/com/company/springmvc/config/db-config/**/jdbc.properties"/>
+    <!-- <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations" value="classpath:/com/company/springmvc/config/db-config/**/jdbc.properties" />
         <property name="fileEncoding" value="UTF-8" />
-    </bean>
+    </bean> -->
     
     <!-- 2、配置数据源也可以用dbcp、c3p0数据库连接池等，这里使用Spring默认的 -->
     <!-- 使用连接池可以提高访问性能，这里可以加入dbcp或c3p0的jar包，并修改class实现
