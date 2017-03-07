@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:mvc="http://www.springframework.org/schema/mvc"
-    xmlns:aop="http://www.springframework.org/schema/aop" 
-    xmlns:tx="http://www.springframework.org/schema/tx"
     xmlns:context="http://www.springframework.org/schema/context"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
     xsi:schemaLocation="
@@ -10,10 +8,6 @@
         http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
-        http://www.springframework.org/schema/aop 
-        http://www.springframework.org/schema/aop/spring-aop-4.3.xsd 
-        http://www.springframework.org/schema/tx  
-        http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-4.3.xsd
     ">
@@ -22,7 +16,7 @@
     <!-- spring3.1开始，应该用RequestMappingHandlerMapping来替换 DefaultAnnotationHandlerMapping，
     	   用 RequestMappingHandlerAdapter来替换 AnnotationMethodHandlerAdapter -->
     <!-- 标签对应的实现类是org.springframework.web.servlet.config.AnnotationDrivenBeanDefinitionParser，
-    	 这个类主要注册8个类的实例：
+    	   这个类主要注册8个类的实例：
          1.RequestMappingHandlerMapping处理@RequestMapping注解;
     	 2.BeanNameUrlHandlerMapping将controller类的名字映射为请求url;
     	 1和2都实现了HandlerMapping接口，用来处理请求映射;
@@ -49,7 +43,7 @@
 	
 	
 	<!-- 静态资源被DispatcherServlet过滤，无法访问，必须配置静态资源过滤，可以直接访问，而不经过controller
-	     ，或者在web.xml里直接过滤<url-pattern>*.js</url-pattern> -->
+	               ，或者在web.xml里直接过滤<url-pattern>*.js</url-pattern> -->
 	<!-- 对静态资源文件的访问，必须要配置mvc:annotation-driven -->
 	<!-- mapping映射到 ResourceHttpRequestHandler进行处理，location指定静态资源的位置,注意必须是webapp根目录下的路径。 -->
 	<!-- 经测试map，只有如下写法可以找到，无论是mapping还是location，其余写法
@@ -58,58 +52,9 @@
  	<mvc:resources mapping="/Resources/**" location="/Resources/css/,/Resources/js/,/Resources/img/" />
      -->
     <mvc:resources mapping="/Resources/css/**" location="/Resources/css/" />
-    <mvc:resources mapping="/Resources/img/**" location="/Resources/img/" />
-    <mvc:resources mapping="/Resources/js/**" location="/Resources/js/" />
-  
-    <!-- spring容器中最多只能定义一个context:property-placeholder，若有多个，可用通配符一并加载 -->
-    <!-- 1、指定从配置文件中加载数据库连接信息 -->
-    <context:property-placeholder location="classpath:/com/company/springmvc/config/db-config/**/jdbc.properties"/>
-    <!-- <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="locations" value="classpath:/com/company/springmvc/config/db-config/**/jdbc.properties" />
-        <property name="fileEncoding" value="UTF-8" />
-    </bean> -->
-    
-    <!-- 2、配置数据源也可以用dbcp、c3p0数据库连接池等，这里使用Spring默认的 -->
-    <!-- 使用连接池可以提高访问性能，这里可以加入dbcp或c3p0的jar包，并修改class实现
-    	 class="com.mchange.v2.c3p0.ComboPooledDataSource.class" -->
-    <bean id="staffinfoDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="${jdbc.mysql.staffinfo.driver}" />
-        <!-- value="jdbc:mysql://10.61.22.84:3306/mysql_test?useUnicode=true&amp;useSSL=false&amp;characterEncoding=UTF-8"/>
-	     -->
-        <property name="url" value="${jdbc.mysql.staffinfo.url}" />
-        <property name="username" value="${jdbc.mysql.staffinfo.username}" />
-        <property name="password" value="${jdbc.mysql.staffinfo.password}" />
-    </bean>
-       
-    <!-- 3、配置sqlSessionFactory -->
-    <bean id="staffinfoSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <!-- 必须要配置dataSource属性，连接不同的数据源，注入数据库连接池 -->
-        <property name="dataSource" ref="staffinfoDataSource" />
-        
-        <!-- 加载指定Mybatis的配置文件位置，该配置文件的内容作为配置信息构建对应的SqlSessionFactoryBuilder，
-        	但是后续属性指定的内容会覆盖该配置文件里面指定的对应内容。-->
-        <!-- <property name="configLocation" value="classpath:mybatis-config.xml" /> -->
-        
-        <!-- 它表示我们的Mapper文件存放的位置，当Mapper文件跟对应的Mapper接口处于同一位置时(且名字也要相同，
-             如：IStaffInfoMapper.java、IStaffInfoMapper.xml)，可以不用指定该属性的值。 -->
-        <property name="mapperLocations" value="classpath:/com/company/springmvc/config/db-config/mybatis/**/staff_info_mapper.xml"/>
-        
-        <!-- 一般对应我们的实体类所在的包，这个时候会自动取对应包中不包括包名的简单类名作为包括包名的别名。多个package之间可以用逗号或者分号等来进行分隔。 -->
-        <!-- <property name="typeAliasesPackage" value="com.tiantian.ckeditor.model" />  -->
-        <!-- 数组类型，用来指定别名的。指定了这个属性后，Mybatis会把这个类型的短名称作为这个类型的别名。
-       	    前提是该类上没有标注@Alias注解，否则将使用该注解对应的值作为此种类型的别名。 -->
-		<!--<typeAliases> <typeAlias alias="UserEntity" type="com.dy.entity.User"/> -->
-    </bean> 
-   
-    <!-- 4、自动扫描Dao接口包，动态实现Dao接口，注入到spring容器中。
-    	 不用一个个手动配置Mapper的映射了，只要Mapper接口类和Mapper映射文件对应即可。
-    	 注意这里使用属性sqlSessionFactoryBeanName -->
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-    	<!-- 必须要basePackage属性，给出需要扫描Dao接口包 -->
-        <property name="basePackage" value="com.company.springmvc.services.staffinfo.dao" />
-        <property name="sqlSessionFactoryBeanName" value="staffinfoSqlSessionFactory" />
-    </bean>
-    
+  	<mvc:resources mapping="/Resources/img/**" location="/Resources/img/" />
+  	<mvc:resources mapping="/Resources/js/**" location="/Resources/js/" />
+
 	<!-- DispatcherServlet拦截器，对转向页面的路径解析·视图渲染 jsp/freemaker/velocity-->
 	<!-- ViewResolver接口的Bean，它的任务就是返回一个视图的具体实现(HTML、JSP、PDF等等). -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
