@@ -3,7 +3,6 @@
 <html>
 	<head>
 		<title>混合图JSP</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 		<!-- 注意：以下的href和src路径一定要在Resources前加斜杠/，
 			  不加的时候一般是可以，但是如果@Controller下的@RequestMapping有路径，则会加上的@RequestMapping地址，最后无法找到 -->
 		<!-- http://www.w3school.com.cn/tags/att_link_href.asp -->
